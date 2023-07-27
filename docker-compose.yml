@@ -25,5 +25,18 @@ services:
     depends_on:
       - vc-postgres-db
     command: sh -c "npm install && npm run start:dev"
+  vc-app-fe:
+    image: node:19
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./vc-employee-maintenance-app-fe:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    depends_on:
+      - vc-postgres-db
+      - vc-app-be
+    command: sh -c "npm install && npm run dev"
 volumes:
   vc-nest-postgres:
