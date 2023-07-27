@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  vc-postgres-db:
+    image: postgres:latest
+    restart: always
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - vc-nest-postgres:/var/lib/postgresql/data
+volumes:
+  vc-nest-postgres:
