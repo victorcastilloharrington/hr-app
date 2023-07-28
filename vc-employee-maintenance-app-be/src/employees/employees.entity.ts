@@ -7,13 +7,13 @@ export class Employee {
   id: number;
 
   @Field()
-  firstName: string;
+  firstname: string;
 
   @Field()
-  lastName: string;
+  lastname: string;
 
   @Field()
-  hireDate: Date;
+  hiredate: Date;
 
   @Field()
   phone: string;
