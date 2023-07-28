@@ -13,19 +13,31 @@ datasource db {
 
 // Define the `Department` table in the database
 model Department {
-  id        Int        @id @default(autoincrement())
-  name      String
-  employees Employee[]
+  id                     Int                      @id @default(autoincrement())
+  name                   String
+  employees              Employee[]
+  DepartmentsOnEmployees DepartmentsOnEmployees[]
 }
 
 // Define the `Employee` table in the database
 model Employee {
-  id            Int        @id @default(autoincrement())
-  firstname     String
-  lastname      String
-  hiredate      DateTime?
-  phone         String?
-  address       String
-  department_id Int
+  id                     Int                      @id @default(autoincrement())
+  firstname              String
+  lastname               String
+  hiredate               DateTime?
+  phone                  String?
+  address                String
+  department_id          Int
+  department             Department               @relation(fields: [department_id], references: [id])
+  DepartmentsOnEmployees DepartmentsOnEmployees[]
+}
+
+model DepartmentsOnEmployees {
+  employee      Employee   @relation(fields: [employee_id], references: [id])
+  employee_id   Int
   department    Department @relation(fields: [department_id], references: [id])
+  department_id Int
+  assignedAt    DateTime   @default(now())
+
+  @@id([employee_id, department_id])
 }
