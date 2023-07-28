@@ -27,3 +27,13 @@ type Query {
   GetAllEmployees: [Employee!]!
   GetAllDepartments: [Department!]!
 }
+
+type Mutation {
+  UpdateEmployee(updateEmployeeData: UpdateEmployeeInput!): Employee!
+  DeleteEmployee(id: String!): Employee!
+}
+
+input UpdateEmployeeInput {
+  id: String!
+  department_id: String!
+}
