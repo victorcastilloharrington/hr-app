@@ -34,9 +34,9 @@ model Employee {
 
 model DepartmentsOnEmployees {
   id            Int        @id @default(autoincrement())
-  employee      Employee   @relation(fields: [employee_id], references: [id])
+  employee      Employee   @relation(fields: [employee_id], references: [id], onDelete: Cascade)
   employee_id   Int
-  department    Department @relation(fields: [department_id], references: [id])
+  department    Department @relation(fields: [department_id], references: [id], onDelete: Cascade)
   department_id Int
   assignedAt    DateTime   @default(now())
 }
