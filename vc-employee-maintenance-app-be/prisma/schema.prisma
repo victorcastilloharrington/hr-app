@@ -33,11 +33,10 @@ model Employee {
 }
 
 model DepartmentsOnEmployees {
+  id            Int        @id @default(autoincrement())
   employee      Employee   @relation(fields: [employee_id], references: [id])
   employee_id   Int
   department    Department @relation(fields: [department_id], references: [id])
   department_id Int
   assignedAt    DateTime   @default(now())
-
-  @@id([employee_id, department_id])
 }
