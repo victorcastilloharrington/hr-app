@@ -8,10 +8,13 @@ export class EmployeesService {
   async findOneById(
     employeeWhereUniqueInput: Prisma.EmployeeWhereUniqueInput,
   ): Promise<Employee | null> {
-    return this.prisma.employee.findUnique({ where: employeeWhereUniqueInput });
+    return this.prisma.employee.findUnique({
+      where: employeeWhereUniqueInput,
+      include: { department: true },
+    });
   }
 
   async findAll(): Promise<Employee[] | null> {
-    return this.prisma.employee.findMany();
+    return this.prisma.employee.findMany({ include: { department: true } });
   }
 }
