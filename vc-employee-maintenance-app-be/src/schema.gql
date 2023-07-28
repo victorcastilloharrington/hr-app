@@ -25,4 +25,5 @@ scalar DateTime
 type Query {
   GetEmployeeById(id: String!): Employee!
   GetAllEmployees: [Employee!]!
+  GetAllDepartments: [Department!]!
 }
