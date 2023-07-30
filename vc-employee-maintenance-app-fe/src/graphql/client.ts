@@ -1,6 +1,4 @@
-type variables = {id: string} | {id: string, department_id: string}
-
-export const createQuery =(query: string, variables?: variables) => {
+export const createQuery =(query: string, variables?: TVariables) => {
  return JSON.stringify({query, variables})
 }
 
@@ -14,7 +12,6 @@ export const graphqlFetch = (url: string, body: string) => {
         body
       };
 
-      console.log(body)
     return fetch(url, options)
 
 }
