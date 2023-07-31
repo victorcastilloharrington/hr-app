@@ -5,7 +5,7 @@ const CoreComponent: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div>
       <HeaderComponent />
-      {children}
+      <div className="container mx-auto">{children}</div>
     </div>
   );
 };

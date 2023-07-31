@@ -55,26 +55,32 @@ const DetailComponent: FC<TEmployeeDetail> = ({
   };
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-wrap">
+      <div className="p-4">
         <Image
           src="https://fakeimg.pl/150x150?text=Avatar&font=bebas"
           alt="Employee Avatar"
           width={150}
           height={150}
+          className="border-2 border-gray-500 rounded relative"
         />
-        {!active && <span>Inactive</span>}
+        {!active && (
+          <span className="relative bg-red-400 py-1 px-6 font-bold rounded text-lg -top-4 left-4">
+            Inactive
+          </span>
+        )}
       </div>
-      <div>
-        <h3>{name}</h3>
-        <p>Employee Id: {id}</p>
-        <p>Employee Department: {departmentName}</p>
-        <p>Employee Telephone: {phone}</p>
-        <p>Employee Address: {address}</p>
+      <div className="p-4 flex-grow">
+        <h3 className="font-bold text-2xl mb-4">{name}</h3>
+        <p className="mb-2">Employee Id: {id}</p>
+        <p className="mb-2">Department: {departmentName}</p>
+        <p className="mb-2">Telephone: {phone}</p>
+        <p className="mb-2">Address: {address}</p>
 
-        <h6>Update Department</h6>
-        <div>
+        <h6 className="mt-4 font-bold text-md">Update Department</h6>
+        <div className="flex align-center mt-2">
           <select
+            className="border-2 border-gray-500 py-2 px-4 rounded mr-1"
             onChange={(e) => changeSelectDepHandler(Number(e.target.value))}
             value={currentDep}
           >
@@ -84,22 +90,30 @@ const DetailComponent: FC<TEmployeeDetail> = ({
               </option>
             ))}
           </select>
-          <button onClick={updateDepartmentHandler} disabled={!isChanged}>
+          <button
+            className="bg-black disabled:bg-gray-300 text-white px-4 py-2 text-lg font-bold rounded"
+            onClick={updateDepartmentHandler}
+            disabled={!isChanged}
+          >
             Update
           </button>
         </div>
         <div></div>
       </div>
-      <div>
-        <h5>Hire Date</h5>
+      <div className="p-4">
+        <h5 className="font-bold text-lg">Hire Date</h5>
         <p>{dates.hired}</p>
         <p>{dates.hiredSince}</p>
 
-        <button onClick={toggleEmployeeHandler}>
+        <button
+          className={`mt-4 disabled:bg-gray-300 text-white px-4 py-2 text-lg font-bold drop-shadow-md rounded ${
+            active ? "bg-red-600" : "bg-green-600"
+          }`}
+          onClick={toggleEmployeeHandler}
+        >
           {active ? "Deactivate" : "Activate"}
         </button>
       </div>
-      <h4>Department History</h4>
       <HistoryComponent history={depHistory} />
     </div>
   );
