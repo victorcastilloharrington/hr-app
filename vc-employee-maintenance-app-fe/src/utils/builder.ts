@@ -40,6 +40,7 @@ export const employeeDetailBuilder = (data: {
     department,
     address,
     phone,
+    isActive,
     DepartmentsOnEmployees,
   } = data.GetEmployeeById;
 
@@ -48,8 +49,10 @@ export const employeeDetailBuilder = (data: {
     name: `${firstname} ${lastname}`,
     dates: dateBuilder(hiredate),
     departmentName: department.name,
+    departmentId: department.id,
     address,
     phone,
+    isActive,
   };
 
   const history = DepartmentsOnEmployees?.map((doe) => {

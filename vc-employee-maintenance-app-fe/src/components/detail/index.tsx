@@ -1,17 +1,58 @@
 import { TEmployeeDetail } from "@/types/detail";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { HistoryComponent } from "./history";
+import {
+  toggleActiveEmployee,
+  updateEmployeeDepartment,
+} from "@/graphql/queries";
+import moment from "moment";
 
 const DetailComponent: FC<TEmployeeDetail> = ({
   info,
   history,
   departments,
 }) => {
-  const { id, name, dates, departmentName, phone, address } = info;
+  const {
+    id,
+    name,
+    dates,
+    departmentName,
+    departmentId,
+    phone,
+    address,
+    isActive,
+  } = info;
 
-  const deactivateUserHandler = () => {};
-  const updateDepartmentHandler = () => {};
+  const [active, setActive] = useState(isActive);
+  const [depHistory, setDepHistory] = useState(history);
+  const [currentDep, setCurrentDep] = useState(departmentId);
+  const [isChanged, setIsChanged] = useState(false);
+
+  const changeSelectDepHandler = (id: number) => {
+    if (!isChanged) setIsChanged(true);
+    setCurrentDep(id);
+  };
+
+  const toggleEmployeeHandler = () => {
+    toggleActiveEmployee(`${id}`)
+      .then((res) => setActive(res))
+      .catch((err) => console.error(err));
+  };
+  const updateDepartmentHandler = () => {
+    updateEmployeeDepartment(`${id}`, `${currentDep}`)
+      .then((res: TDepartmentsOnEmployees) => {
+        const newDep = {
+          departmentName:
+            departments.find((dep) => dep.id === res.department_id)?.name || "",
+          date: moment(res.assignedAt).format("MM/DD/YYYY"),
+        };
+        const updateDepHistory = [...depHistory];
+        updateDepHistory.unshift(newDep);
+        setDepHistory(updateDepHistory);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div>
@@ -22,6 +63,7 @@ const DetailComponent: FC<TEmployeeDetail> = ({
           width={150}
           height={150}
         />
+        {!active && <span>Inactive</span>}
       </div>
       <div>
         <h3>{name}</h3>
@@ -32,14 +74,19 @@ const DetailComponent: FC<TEmployeeDetail> = ({
 
         <h6>Update Department</h6>
         <div>
-          <select>
+          <select
+            onChange={(e) => changeSelectDepHandler(Number(e.target.value))}
+            value={currentDep}
+          >
             {departments.map((department, i) => (
               <option key={`department-${i}`} value={department.id}>
                 {department.name}
               </option>
             ))}
           </select>
-          <button onClick={updateDepartmentHandler}>Update</button>
+          <button onClick={updateDepartmentHandler} disabled={!isChanged}>
+            Update
+          </button>
         </div>
         <div></div>
       </div>
@@ -47,10 +94,13 @@ const DetailComponent: FC<TEmployeeDetail> = ({
         <h5>Hire Date</h5>
         <p>{dates.hired}</p>
         <p>{dates.hiredSince}</p>
-        <button onClick={deactivateUserHandler}>Deactivate</button>
+
+        <button onClick={toggleEmployeeHandler}>
+          {active ? "Deactivate" : "Activate"}
+        </button>
       </div>
       <h4>Department History</h4>
-      <HistoryComponent history={history} />
+      <HistoryComponent history={depHistory} />
     </div>
   );
 };

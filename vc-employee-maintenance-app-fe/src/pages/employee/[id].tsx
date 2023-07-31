@@ -1,5 +1,4 @@
 import DetailComponent from "@/components/detail";
-import { HistoryComponent } from "@/components/detail/history";
 import { getEmployeesById } from "@/graphql/queries";
 import { TEmployeeDetail } from "@/types/detail";
 import { employeeDetailBuilder } from "@/utils/builder";
@@ -21,8 +20,6 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ query }) => {
   const { id } = query;
   const data = await getEmployeesById(id as string);
-
-  console.log(data);
 
   const employee = employeeDetailBuilder(data);
   return { props: { employee } };

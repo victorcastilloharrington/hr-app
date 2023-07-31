@@ -21,6 +21,7 @@ declare global {
     phone: string;
     address: string;
     department: TDepartment;
+    isActive: boolean;
     DepartmentsOnEmployees: TDepartmentsOnEmployees[];
   };
 }

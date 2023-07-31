@@ -9,7 +9,9 @@ export const GET_EMPLOYEE_BY_ID = `query GetEmployeeById($id: String!) {
     hiredate
     phone
     address
+    isActive
     department{
+      id
       name
     }
     DepartmentsOnEmployees{
@@ -47,28 +49,16 @@ export const GET_ALL_DEPARTMENTS = `query GetAllDepartments {
 
 export const UPDATE_EMPLOYEE = `mutation UpdateEmployee($id: String!, $department_id: String!) {
   UpdateEmployee(updateEmployeeData:{id: $id, department_id: $department_id}){
-    id
-    firstname
-    lastname
-    hiredate
-    phone
-    address
-    department{
-      name
+    DepartmentsOnEmployees{
+      id
+      department_id
+      assignedAt
     }
   }
 }`;
 
 export const DELETE_EMPLOYEE = `mutation DeleteEmployee($id: String!) {
   DeleteEmployee(id: $id){
-    id
-    firstname
-    lastname
-    hiredate
-    phone
-    address
-    department{
-      name
-    }
+    isActive
   }
 }`;

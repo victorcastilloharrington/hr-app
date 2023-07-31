@@ -13,8 +13,10 @@ export type TEmployeeInfo = {
   name: string;
   dates: TEmployeeDates;
   departmentName: string;
+  departmentId: number;
   address: string;
   phone: string;
+  isActive: boolean;
 };
 
 export type TEmployeeDetail = {
