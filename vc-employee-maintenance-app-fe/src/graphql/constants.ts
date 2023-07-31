@@ -1,5 +1,5 @@
-export const GRAPHQL_URL_CLIENT_SIDE = 'http://localhost:4000/graphql'
-export const GRAPHQL_URL_SERVER_SIDE = 'http://vc-app-be:4000/graphql'
+export const GRAPHQL_URL_CLIENT_SIDE = "http://localhost:4000/graphql";
+export const GRAPHQL_URL_SERVER_SIDE = "http://vc-app-be:4000/graphql";
 
 export const GET_EMPLOYEE_BY_ID = `query GetEmployeeById($id: String!) {
   GetEmployeeById(id: $id){
@@ -12,8 +12,17 @@ export const GET_EMPLOYEE_BY_ID = `query GetEmployeeById($id: String!) {
     department{
       name
     }
+    DepartmentsOnEmployees{
+      id
+      department_id
+      assignedAt
+    }
   }
-}`
+  GetAllDepartments{
+    id
+    name
+  }
+}`;
 
 export const GET_ALL_EMPLOYEES = `query GetAllEmployees {
   GetAllEmployees{
@@ -27,14 +36,14 @@ export const GET_ALL_EMPLOYEES = `query GetAllEmployees {
       name
     }
   }
-}`
+}`;
 
 export const GET_ALL_DEPARTMENTS = `query GetAllDepartments {
   GetAllDepartments{
   	id
    	name
   }
-}`
+}`;
 
 export const UPDATE_EMPLOYEE = `mutation UpdateEmployee($id: String!, $department_id: String!) {
   UpdateEmployee(updateEmployeeData:{id: $id, department_id: $department_id}){
@@ -48,7 +57,7 @@ export const UPDATE_EMPLOYEE = `mutation UpdateEmployee($id: String!, $departmen
       name
     }
   }
-}`
+}`;
 
 export const DELETE_EMPLOYEE = `mutation DeleteEmployee($id: String!) {
   DeleteEmployee(id: $id){
@@ -62,5 +71,4 @@ export const DELETE_EMPLOYEE = `mutation DeleteEmployee($id: String!) {
       name
     }
   }
-}`
-
+}`;

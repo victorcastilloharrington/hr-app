@@ -1,19 +1,30 @@
 import DetailComponent from "@/components/detail";
+import { HistoryComponent } from "@/components/detail/history";
 import { getEmployeesById } from "@/graphql/queries";
+import { TEmployeeDetail } from "@/types/detail";
+import { employeeDetailBuilder } from "@/utils/builder";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { FC } from "react";
 
 const EmployeeDetailPage: FC<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ employee }) => {
-  return <DetailComponent {...employee} />;
+  return (
+    <div>
+      <DetailComponent {...employee} />
+    </div>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<{
-  employee: TEmployee;
+  employee: TEmployeeDetail;
 }> = async ({ query }) => {
   const { id } = query;
-  const employee = await getEmployeesById(id as string);
+  const data = await getEmployeesById(id as string);
+
+  console.log(data);
+
+  const employee = employeeDetailBuilder(data);
   return { props: { employee } };
 };
 export default EmployeeDetailPage;

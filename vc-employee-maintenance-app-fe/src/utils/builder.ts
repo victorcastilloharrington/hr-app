@@ -1,3 +1,4 @@
+import { TEmployeeDetail } from "@/types/detail";
 import { TEmployeeList } from "@/types/list";
 import moment from "moment";
 
@@ -25,4 +26,47 @@ export const employeeListBuilder = (
       departmentName: department.name,
     };
   });
+};
+
+export const employeeDetailBuilder = (data: {
+  GetEmployeeById: TEmployee;
+  GetAllDepartments: TDepartment[];
+}): TEmployeeDetail => {
+  const {
+    id,
+    firstname,
+    lastname,
+    hiredate,
+    department,
+    address,
+    phone,
+    DepartmentsOnEmployees,
+  } = data.GetEmployeeById;
+
+  const info = {
+    id,
+    name: `${firstname} ${lastname}`,
+    dates: dateBuilder(hiredate),
+    departmentName: department.name,
+    address,
+    phone,
+  };
+
+  const history = DepartmentsOnEmployees?.map((doe) => {
+    const departmentName =
+      data.GetAllDepartments?.find(
+        (department) => department.id === doe.department_id
+      )?.name || "";
+
+    return {
+      date: moment(doe.assignedAt).format("MM/DD/YYYY"),
+      departmentName,
+    };
+  });
+
+  return {
+    info,
+    history,
+    departments: data.GetAllDepartments,
+  };
 };
