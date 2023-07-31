@@ -1,26 +1,38 @@
+import { TEmployeeList } from "@/types/list";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { FC } from "react";
 
-const CardComponent: FC<TEmployee> = ({
-  firstname,
-  lastname,
-  hiredate,
-  department,
+const CardComponent: FC<TEmployeeList> = ({
+  id,
+  name,
+  hired,
+  departmentName,
 }) => {
-  const parsedDate = new Date(hiredate).toDateString();
+  const router = useRouter();
 
   return (
     <div>
-      <div>Icon</div>
       <div>
-        <span>{`${firstname} ${lastname}`}</span>
-        <span>({department.name})</span>
+        <Image
+          src="https://fakeimg.pl/150x150?text=Avatar&font=bebas"
+          alt="Employee Avatar"
+          width={80}
+          height={80}
+        />
+      </div>
+      <div>
+        <span>{name}</span>
+        <span>{departmentName}</span>
       </div>
       <div>
         <p>Hire Date</p>
-        <p>{parsedDate}</p>
+        <p>{hired}</p>
       </div>
       <div>
-        <button onClick={() => {}}>View Details</button>
+        <button onClick={() => router.push(`/employee/${id}`)}>
+          View Details
+        </button>
       </div>
     </div>
   );

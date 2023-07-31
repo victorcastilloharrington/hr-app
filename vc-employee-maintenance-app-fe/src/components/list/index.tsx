@@ -1,7 +1,8 @@
 import { FC } from "react";
 import CardComponent from "./card";
+import { TEmployeeList } from "@/types/list";
 type TListComponent = {
-  employees: TEmployee[];
+  employees: TEmployeeList[];
 };
 const ListComponent: FC<TListComponent> = ({ employees }) => {
   return (
