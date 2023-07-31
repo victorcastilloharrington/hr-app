@@ -12,6 +12,7 @@ const HeaderComponent: FC = () => {
         height={100}
         alt="Logo"
         onClick={() => router.push("/")}
+        className="cursor-pointer"
       />
     </div>
   );
