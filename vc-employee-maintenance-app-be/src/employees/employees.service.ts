@@ -10,7 +10,14 @@ export class EmployeesService {
   ): Promise<Employee | null> {
     return this.prisma.employee.findUnique({
       where: employeeWhereUniqueInput,
-      include: { department: true },
+      include: {
+        department: true,
+        DepartmentsOnEmployees: {
+          orderBy: {
+            assignedAt: 'desc',
+          },
+        },
+      },
     });
   }
 
@@ -34,6 +41,11 @@ export class EmployeesService {
       where,
       include: {
         department: true,
+        DepartmentsOnEmployees: {
+          orderBy: {
+            assignedAt: 'desc',
+          },
+        },
       },
     });
   }
@@ -43,6 +55,11 @@ export class EmployeesService {
       where,
       include: {
         department: true,
+        DepartmentsOnEmployees: {
+          orderBy: {
+            assignedAt: 'desc',
+          },
+        },
       },
     });
   }

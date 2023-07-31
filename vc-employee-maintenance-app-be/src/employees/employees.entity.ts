@@ -1,5 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Department } from 'src/departments/departments.entity';
+import {
+  Department,
+  DepartmentsOnEmployees,
+} from 'src/departments/departments.entity';
 
 @ObjectType()
 export class Employee {
@@ -23,4 +26,7 @@ export class Employee {
 
   @Field(() => Department)
   department: Department;
+
+  @Field(() => [DepartmentsOnEmployees])
+  DepartmentsOnEmployees: [DepartmentsOnEmployees];
 }
