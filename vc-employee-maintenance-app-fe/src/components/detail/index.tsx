@@ -60,17 +60,17 @@ const DetailComponent: FC<TEmployeeDetail> = ({
         <Image
           src="https://fakeimg.pl/150x150?text=Avatar&font=bebas"
           alt="Employee Avatar"
-          width={150}
-          height={150}
-          className="border-2 border-gray-500 rounded relative"
+          width={200}
+          height={200}
+          className="rounded"
         />
         {!active && (
-          <span className="relative bg-red-400 py-1 px-6 font-bold rounded text-lg -top-4 left-4">
+          <div className="mt-1 w-full bg-red-400 py-2 px-6 font-bold rounded text-xl -top-4 left-10 text-center">
             Inactive
-          </span>
+          </div>
         )}
       </div>
-      <div className="p-4 flex-grow">
+      <div className="p-4 grow">
         <h3 className="font-bold text-2xl mb-4">{name}</h3>
         <p className="mb-2">Employee Id: {id}</p>
         <p className="mb-2">Department: {departmentName}</p>
@@ -106,7 +106,7 @@ const DetailComponent: FC<TEmployeeDetail> = ({
         <p>{dates.hiredSince}</p>
 
         <button
-          className={`mt-4 disabled:bg-gray-300 text-white px-4 py-2 text-lg font-bold drop-shadow-md rounded ${
+          className={`mt-4 text-white px-4 py-2 text-lg font-bold drop-shadow-md rounded ${
             active ? "bg-red-600" : "bg-green-600"
           }`}
           onClick={toggleEmployeeHandler}
