@@ -7,7 +7,7 @@ const ListComponent: FC<TListComponent> = ({ employees }) => {
   return (
     <div>
       {employees?.map((employee, i) => (
-        <CardComponent key={`employee-list-${i}`} />
+        <CardComponent key={`employee-list-${i}`} {...employee} />
       ))}
     </div>
   );
