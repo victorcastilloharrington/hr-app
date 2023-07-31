@@ -51,8 +51,12 @@ export class EmployeesService {
   }
 
   async delete(where: Prisma.EmployeeWhereUniqueInput): Promise<Employee> {
+    const employee = await this.prisma.employee.findUnique({
+      where,
+    });
+
     const data = {
-      isActive: false,
+      isActive: !employee.isActive,
     };
 
     return this.prisma.employee.update({
