@@ -28,6 +28,7 @@ model Employee {
   phone                  String?
   address                String
   department_id          Int
+  isActive               Boolean                  @default(true)
   department             Department               @relation(fields: [department_id], references: [id])
   DepartmentsOnEmployees DepartmentsOnEmployees[]
 }

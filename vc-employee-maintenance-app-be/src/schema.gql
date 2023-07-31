@@ -26,6 +26,7 @@ type Employee {
   hiredate: DateTime!
   phone: String!
   address: String!
+  isActive: Boolean!
   department: Department!
   DepartmentsOnEmployees: [DepartmentsOnEmployees!]!
 }

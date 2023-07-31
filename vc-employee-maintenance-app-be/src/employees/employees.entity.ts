@@ -24,6 +24,9 @@ export class Employee {
   @Field()
   address: string;
 
+  @Field()
+  isActive: boolean;
+
   @Field(() => Department)
   department: Department;
 
