@@ -12,3 +12,15 @@ export const getAllEmployees = async () => {
     }
 
   };
+
+  export const getEmployeesById = async (id: string) => {
+    try {
+      const response = await (await graphqlFetch(constants.GRAPHQL_URL_SERVER_SIDE,createQuery(constants.GET_EMPLOYEE_BY_ID, {id}))).json();
+
+      return response?.data?.GetEmployeeById
+    }
+    catch (err:any){
+      console.error('error fetching graphql: ', err);
+    }
+
+  };
